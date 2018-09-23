@@ -1,8 +1,11 @@
 const net = require('net');
 const port = 8124;
+let sid = 0;
+let identifier;
 
 const server = net.createServer((client) => {
-    console.log('Client connected');
+    identifier = Date.now()+ ++sid;
+    console.log(`Client ${identifier} connected`);
 
     client.setEncoding('utf8');
 
