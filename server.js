@@ -12,7 +12,7 @@ const server = net.createServer((client) => {
     identifier = Date.now()+ ++sid;
     let streamer = fs.createWriteStream(`logs\\${identifier}.log`);
     console.log(`Client ${identifier} connected`);
-
+    streamer.write(`Client ${identifier} connected`);
     client.setEncoding('utf8');
 
     client.on('data', (data) => {
@@ -32,8 +32,9 @@ const server = net.createServer((client) => {
         }
         else{
             let answer = ['Yes','No'][Math.random() < 0.5 ? 0 : 1];
-            client.write(answer);
+            streamer.write(answer);
             console.log(answer);
+            client.write(answer);
         }
     });
 
